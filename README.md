@@ -14,7 +14,7 @@ A simple web application that generates images using the Flux Schnell AI model v
 
 ## 🚀 Live Demo
 
-[View Live App](https://rovodev-eval.pages.dev) *(Replace with your actual Cloudflare Pages URL)*
+[View Live App](https://flux-image-generator.pages.dev) - **Automated deployment active!** ✅
 
 ## 📋 Prerequisites
 

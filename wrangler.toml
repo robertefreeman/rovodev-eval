@@ -2,5 +2,5 @@
 name = "flux-image-generator"
 compatibility_date = "2024-01-01"
 
-# This is a static site - no build process needed
-# Files are deployed directly from the repository root
+# Pages configuration
+pages_build_output_dir = "."

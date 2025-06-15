@@ -14,7 +14,7 @@ A simple web application that generates images using the Flux Schnell AI model v
 
 ## 🚀 Live Demo
 
-[View Live App](https://flux-image-generator.pages.dev) - **Automated deployment active!** ✅
+[View Live App](https://fluxgen.pages.dev) - **Automated deployment active!** ✅
 
 ## 📋 Prerequisites
 
@@ -112,7 +112,7 @@ You need to add **2 secrets** to your GitHub repository for automated deployment
 1. Make any small change to your repository (e.g., edit this README)
 2. Commit and push to the `main` branch
 3. Go to **Actions** tab to watch the deployment
-4. Your app will be live at: `https://flux-image-generator.pages.dev`
+4. Your app will be live at: `https://fluxgen.pages.dev`
 
 ##### ✅ Verification
 
@@ -246,7 +246,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ### Important URLs
 
-- **Live App**: `https://flux-image-generator.pages.dev`
+- **Live App**: `https://fluxgen.pages.dev`
 - **GitHub Actions**: `https://github.com/robertefreeman/rovodev-eval/actions`
 - **Cloudflare Dashboard**: `https://dash.cloudflare.com/pages`
 - **Together.AI API**: `https://api.together.xyz/playground`

@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  PROJECT_NAME: flux-image-generator
+  PROJECT_NAME: fluxgen
 
 jobs:
   deploy:
@@ -46,7 +46,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy . --commit-dirty=true
+          command: pages deploy . --project-name=${{ env.PROJECT_NAME }} --create --commit-dirty=true
 
       - name: Add deployment summary
         run: |

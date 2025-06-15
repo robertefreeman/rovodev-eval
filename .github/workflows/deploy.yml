@@ -47,7 +47,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: '4.50.0'
           command: pages project create ${{ env.PROJECT_NAME }}
 
       - name: Deploy to Cloudflare Pages
@@ -55,7 +54,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: '4.50.0'
           command: pages deploy . --project-name=${{ env.PROJECT_NAME }} --commit-dirty=true
 
       - name: Add deployment summary

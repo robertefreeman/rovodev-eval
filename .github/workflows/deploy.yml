@@ -1,0 +1,58 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  PROJECT_NAME: flux-image-generator
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to Cloudflare Pages
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (for any future build steps)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Validate HTML files
+        run: |
+          echo "Validating HTML structure..."
+          # Simple validation to ensure files exist and are not empty
+          if [ ! -f "index.html" ]; then
+            echo "Error: index.html not found"
+            exit 1
+          fi
+          if [ ! -s "index.html" ]; then
+            echo "Error: index.html is empty"
+            exit 1
+          fi
+          echo "HTML validation passed"
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy . --project-name=${{ env.PROJECT_NAME }} --compatibility-date=2024-01-01
+
+      - name: Add deployment summary
+        run: |
+          echo "## 🚀 Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Project**: ${{ env.PROJECT_NAME }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ✅ Deployed successfully" >> $GITHUB_STEP_SUMMARY
+          echo "- **URL**: https://${{ env.PROJECT_NAME }}.pages.dev" >> $GITHUB_STEP_SUMMARY

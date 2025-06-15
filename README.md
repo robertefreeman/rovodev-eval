@@ -54,7 +54,17 @@ A simple web application that generates images using the Flux Schnell AI model v
 
 ### 3. Deploy to Cloudflare Pages
 
-#### Option A: Connect GitHub Repository
+#### Option A: Automated Deployment (Recommended)
+
+This repository includes GitHub Actions for automated deployment:
+
+1. **Set up secrets**: Follow the [Deployment Guide](DEPLOYMENT.md) to configure GitHub secrets
+2. **Push to main**: Every push automatically deploys to Cloudflare Pages
+3. **Live URL**: Your app will be available at `https://flux-image-generator.pages.dev`
+
+📖 **[Complete Deployment Setup Guide](DEPLOYMENT.md)**
+
+#### Option B: Manual Deployment
 
 1. Log in to [Cloudflare Dashboard](https://dash.cloudflare.com)
 2. Go to **Pages** → **Create a project**
@@ -64,7 +74,7 @@ A simple web application that generates images using the Flux Schnell AI model v
    - **Build output directory**: `/` (root directory)
 5. Click **Save and Deploy**
 
-#### Option B: Direct Upload
+#### Option C: Direct Upload
 
 1. Go to **Pages** → **Create a project** → **Direct Upload**
 2. Upload the following files:

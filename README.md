@@ -56,13 +56,73 @@ A simple web application that generates images using the Flux Schnell AI model v
 
 #### Option A: Automated Deployment (Recommended)
 
-This repository includes GitHub Actions for automated deployment:
+This repository includes GitHub Actions for automated deployment. Follow these steps:
 
-1. **Set up secrets**: Follow the [Deployment Guide](DEPLOYMENT.md) to configure GitHub secrets
-2. **Push to main**: Every push automatically deploys to Cloudflare Pages
-3. **Live URL**: Your app will be available at `https://flux-image-generator.pages.dev`
+##### 🔑 Required GitHub Secrets
 
-📖 **[Complete Deployment Setup Guide](DEPLOYMENT.md)**
+You need to add **2 secrets** to your GitHub repository for automated deployment:
+
+| Secret Name | Description | How to Get It |
+|-------------|-------------|---------------|
+| `CLOUDFLARE_API_TOKEN` | API token for Cloudflare authentication | [Create API Token](#creating-cloudflare-api-token) |
+| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account identifier | [Find Account ID](#finding-cloudflare-account-id) |
+
+##### 📋 Step-by-Step Setup
+
+**Step 1: Find Your Cloudflare Account ID**
+1. Log in to [Cloudflare Dashboard](https://dash.cloudflare.com)
+2. In the right sidebar, you'll see **Account ID**
+3. Click the copy button next to it
+4. Save this value - you'll need it for GitHub secrets
+
+**Step 2: Create Cloudflare API Token**
+1. Go to [Cloudflare API Tokens](https://dash.cloudflare.com/profile/api-tokens)
+2. Click **"Create Token"**
+3. Select **"Custom token"**
+4. Configure the token:
+   - **Token name**: `GitHub Actions Deployment`
+   - **Permissions**:
+     - `Cloudflare Pages:Edit`
+     - `Account:Read`
+   - **Account Resources**: Include your account
+   - **Zone Resources**: Include all zones
+5. Click **"Continue to summary"** → **"Create Token"**
+6. **Copy the token immediately** - you won't see it again!
+
+**Step 3: Add Secrets to GitHub**
+1. Go to your GitHub repository: `https://github.com/robertefreeman/rovodev-eval`
+2. Click **Settings** → **Secrets and variables** → **Actions**
+3. Click **"New repository secret"** and add each secret:
+
+   **First Secret:**
+   ```
+   Name: CLOUDFLARE_API_TOKEN
+   Value: [Paste your API token from Step 2]
+   ```
+
+   **Second Secret:**
+   ```
+   Name: CLOUDFLARE_ACCOUNT_ID
+   Value: [Paste your Account ID from Step 1]
+   ```
+
+   > ⚠️ **Important**: Copy the names exactly as shown above (case-sensitive)
+
+**Step 4: Test Deployment**
+1. Make any small change to your repository (e.g., edit this README)
+2. Commit and push to the `main` branch
+3. Go to **Actions** tab to watch the deployment
+4. Your app will be live at: `https://flux-image-generator.pages.dev`
+
+##### ✅ Verification
+
+After setup, every push to `main` will:
+- ✅ Automatically deploy to Cloudflare Pages
+- ✅ Show deployment status in GitHub Actions
+- ✅ Provide live URL in deployment summary
+- ✅ Create preview deployments for pull requests
+
+📖 **[Detailed Deployment Guide](DEPLOYMENT.md)** | 🔧 **[Troubleshooting](DEPLOYMENT.md#troubleshooting)**
 
 #### Option B: Manual Deployment
 
@@ -174,6 +234,29 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - [Together.AI](https://together.ai) for providing the API
 - [Black Forest Labs](https://blackforestlabs.ai) for the Flux model
 - [Cloudflare Pages](https://pages.cloudflare.com) for free hosting
+
+## 🔧 Quick Reference
+
+### GitHub Secrets Required for Deployment
+
+| Secret Name | Where to Find It | Purpose |
+|-------------|------------------|---------|
+| `CLOUDFLARE_API_TOKEN` | [Cloudflare API Tokens](https://dash.cloudflare.com/profile/api-tokens) | Authenticate with Cloudflare API |
+| `CLOUDFLARE_ACCOUNT_ID` | [Cloudflare Dashboard](https://dash.cloudflare.com) (right sidebar) | Identify your Cloudflare account |
+
+### Important URLs
+
+- **Live App**: `https://flux-image-generator.pages.dev`
+- **GitHub Actions**: `https://github.com/robertefreeman/rovodev-eval/actions`
+- **Cloudflare Dashboard**: `https://dash.cloudflare.com/pages`
+- **Together.AI API**: `https://api.together.xyz/playground`
+
+### API Token Permissions Required
+
+When creating your Cloudflare API token, ensure it has:
+- ✅ `Cloudflare Pages:Edit`
+- ✅ `Account:Read`
+- ✅ Access to your account resources
 
 ---
 

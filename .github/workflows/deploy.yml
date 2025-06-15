@@ -43,20 +43,20 @@ jobs:
           echo "HTML validation passed"
 
       - name: Create Cloudflare Pages Project (if needed)
-        uses: cloudflare/wrangler-action@v4
+        uses: cloudflare/wrangler-action@v3
         continue-on-error: true
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: '4.0.0'
+          wranglerVersion: '4.50.0'
           command: pages project create ${{ env.PROJECT_NAME }}
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v4
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: '4.0.0'
+          wranglerVersion: '4.50.0'
           command: pages deploy . --project-name=${{ env.PROJECT_NAME }} --commit-dirty=true
 
       - name: Add deployment summary

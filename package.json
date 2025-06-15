@@ -22,7 +22,7 @@
   "author": "Robert Freeman",
   "license": "MIT",
   "devDependencies": {
-    "wrangler": "^4.0.0"
+    "wrangler": "^4.50.0"
   },
   "repository": {
     "type": "git",

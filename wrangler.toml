@@ -1,6 +1,6 @@
 # Wrangler configuration for Cloudflare Pages
 name = "fluxgen"
-compatibility_date = "2024-01-01"
+compatibility_date = "2024-12-15"
 
 # Pages configuration
 pages_build_output_dir = "."

@@ -25,7 +25,8 @@ jobs:
       - name: Setup Node.js (for any future build steps)
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
+          cache: 'npm'
 
       - name: Validate HTML files
         run: |
@@ -42,18 +43,20 @@ jobs:
           echo "HTML validation passed"
 
       - name: Create Cloudflare Pages Project (if needed)
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         continue-on-error: true
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: '4.0.0'
           command: pages project create ${{ env.PROJECT_NAME }}
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: '4.0.0'
           command: pages deploy . --project-name=${{ env.PROJECT_NAME }} --commit-dirty=true
 
       - name: Add deployment summary

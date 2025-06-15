@@ -1,0 +1,31 @@
+{
+  "name": "fluxgen",
+  "version": "1.0.0",
+  "description": "AI-powered image generator using Flux Schnell model via Together.AI",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx wrangler pages dev .",
+    "deploy": "npx wrangler pages deploy .",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
+  },
+  "keywords": [
+    "ai",
+    "image-generation",
+    "flux",
+    "together-ai",
+    "cloudflare-pages"
+  ],
+  "author": "Robert Freeman",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robertefreeman/rovodev-eval.git"
+  }
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flux Image Generator</title>
+    <meta name="description" content="Generate beautiful AI images using Flux Schnell model via Together.AI">
+    <meta name="keywords" content="AI, image generation, Flux, Together.AI, artificial intelligence">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Flux Image Generator</h1>
+            <p>Generate beautiful images using Flux Schnell AI model</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <div class="form-group">
+                    <label for="api-key">Together.AI API Key:</label>
+                    <input type="password" id="api-key" placeholder="Enter your Together.AI API key">
+                    <small>Your API key is stored locally and never sent to our servers</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="prompt">Image Prompt:</label>
+                    <textarea id="prompt" placeholder="Describe the image you want to generate..." rows="3"></textarea>
+                    <div class="example-prompts">
+                        <small>Examples:</small>
+                        <div class="prompt-examples">
+                            <button type="button" class="example-btn" data-prompt="A majestic mountain landscape at sunset with golden light">Mountain sunset</button>
+                            <button type="button" class="example-btn" data-prompt="A cute robot reading a book in a cozy library">Robot reading</button>
+                            <button type="button" class="example-btn" data-prompt="Abstract geometric patterns in vibrant colors">Abstract art</button>
+                            <button type="button" class="example-btn" data-prompt="A serene Japanese garden with cherry blossoms">Japanese garden</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="width">Width:</label>
+                    <select id="width">
+                        <option value="1024">1024px</option>
+                        <option value="768">768px</option>
+                        <option value="512">512px</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="height">Height:</label>
+                    <select id="height">
+                        <option value="1024">1024px</option>
+                        <option value="768">768px</option>
+                        <option value="512">512px</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="steps">Steps (1-4):</label>
+                    <input type="number" id="steps" min="1" max="4" value="1">
+                    <small>Higher steps = better quality but slower generation</small>
+                </div>
+
+                <button id="generate-btn" class="generate-btn">
+                    <span class="btn-text">Generate Image</span>
+                    <span class="btn-loading" style="display: none;">Generating...</span>
+                </button>
+            </div>
+
+            <div class="result-section">
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Generating your image...</p>
+                </div>
+
+                <div id="error" class="error" style="display: none;"></div>
+
+                <div id="result" class="result" style="display: none;">
+                    <h3>Generated Image:</h3>
+                    <div class="image-container">
+                        <img id="generated-image" alt="Generated image">
+                        <div class="image-actions">
+                            <button id="download-btn" class="action-btn">Download</button>
+                            <button id="copy-url-btn" class="action-btn">Copy URL</button>
+                        </div>
+                    </div>
+                    <div class="image-info">
+                        <p><strong>Prompt:</strong> <span id="used-prompt"></span></p>
+                        <p><strong>Dimensions:</strong> <span id="used-dimensions"></span></p>
+                        <p><strong>Steps:</strong> <span id="used-steps"></span></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by <a href="https://together.ai" target="_blank">Together.AI</a> and Flux Schnell</p>
+            <p><a href="https://github.com/robertefreeman/rovodev-eval" target="_blank">View on GitHub</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

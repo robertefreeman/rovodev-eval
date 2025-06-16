@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  PROJECT_NAME: freeai
+  PROJECT_NAME: freeai-generator
 
 jobs:
   deploy:

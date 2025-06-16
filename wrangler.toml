@@ -1,5 +1,5 @@
 # Wrangler configuration for Cloudflare Pages
-name = "freeai"
+name = "freeai-generator"
 compatibility_date = "2024-12-15"
 
 # Pages configuration

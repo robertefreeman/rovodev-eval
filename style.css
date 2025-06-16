@@ -30,6 +30,12 @@ body {
     min-height: 100vh;
     color: var(--dark-color);
     overflow-x: hidden;
+    width: 100%;
+}
+
+.off-canvas-wrapper,
+.off-canvas-content {
+    width: 100%;
 }
 
 /* ===== ANIMATIONS ===== */
@@ -112,6 +118,12 @@ body {
     background: transparent;
     color: var(--dark-color);
     text-align: center;
+    width: 100%;
+}
+
+.hero-section .grid-container {
+    max-width: 100%;
+    padding: 0 2rem;
 }
 
 .hero-title {
@@ -163,9 +175,9 @@ body {
 
 /* ===== LAYOUT FIXES ===== */
 .main-app .grid-container.fluid {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
 }
 
 .main-app .grid-x {
@@ -174,6 +186,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
 }
 
 .main-app .cell {
@@ -184,19 +197,27 @@ body {
 
 /* Ensure side-by-side layout on larger screens */
 @media screen and (min-width: 801px) {
+    .main-app .grid-container.fluid {
+        max-width: 1400px;
+        padding: 0 2rem;
+    }
+    
     .main-app .grid-x {
         align-items: flex-start;
-        justify-content: center;
+        justify-content: space-between;
+        gap: 2rem;
     }
     
     .main-app .cell.large-4 {
-        flex: 0 0 400px;
-        max-width: 400px;
+        flex: 0 0 45%;
+        max-width: 45%;
+        min-width: 350px;
     }
     
     .main-app .cell.large-8 {
-        flex: 0 0 500px;
-        max-width: 500px;
+        flex: 0 0 50%;
+        max-width: 50%;
+        min-width: 400px;
     }
 }
 
@@ -481,14 +502,20 @@ label {
 
 /* ===== RESPONSIVE DESIGN ===== */
 @media screen and (max-width: 800px) {
+    .main-app .grid-container.fluid {
+        padding: 0 1rem;
+    }
+    
     .main-app .grid-x {
         flex-direction: column;
+        justify-content: center;
     }
     
     .main-app .cell.large-4,
     .main-app .cell.large-8 {
         flex: 0 0 100%;
         max-width: 100%;
+        min-width: unset;
     }
     
     .hero-title {

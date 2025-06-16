@@ -132,7 +132,7 @@ class FreeAIGenerator {
             this.setGeneratingState(true);
             this.showLoadingState();
             
-            const imageUrl = await this.callAPI(params);
+            const imageUrl = await this.callAPIWithRetry(params);
             
             this.displayResult(imageUrl, params);
             this.showSuccessState();
@@ -200,6 +200,64 @@ class FreeAIGenerator {
         }
 
         return data.data[0].url;
+    }
+
+    async callAPIWithRetry(params, maxRetries = 2) {
+        let lastError;
+        
+        for (let attempt = 0; attempt <= maxRetries; attempt++) {
+            try {
+                return await this.callAPI(params);
+            } catch (error) {
+                lastError = error;
+                
+                // Check if this is a rate limiting error that we should retry
+                const isRateLimitError = error.message.includes('rate limit') || 
+                                       error.message.includes('429') ||
+                                       error.message.includes('too many requests') ||
+                                       error.message.includes('API request failed: 429');
+                
+                if (isRateLimitError && attempt < maxRetries) {
+                    const waitTime = 10000; // 10 seconds
+                    console.log(`Rate limit hit, waiting ${waitTime/1000} seconds before retry ${attempt + 1}/${maxRetries}...`);
+                    
+                    // Update loading message to show retry status
+                    this.updateLoadingMessage(`Rate limit reached. Retrying in ${waitTime/1000} seconds... (${attempt + 1}/${maxRetries})`);
+                    
+                    await this.delay(waitTime);
+                    
+                    // Reset loading message
+                    this.updateLoadingMessage('Creating your masterpiece...');
+                } else if (attempt < maxRetries) {
+                    // For other errors, wait 5 seconds before retry
+                    const waitTime = 5000; // 5 seconds
+                    console.log(`Generation failed, waiting ${waitTime/1000} seconds before retry ${attempt + 1}/${maxRetries}...`);
+                    
+                    this.updateLoadingMessage(`Generation failed. Retrying in ${waitTime/1000} seconds... (${attempt + 1}/${maxRetries})`);
+                    
+                    await this.delay(waitTime);
+                    
+                    this.updateLoadingMessage('Creating your masterpiece...');
+                } else {
+                    // Final attempt failed
+                    break;
+                }
+            }
+        }
+        
+        // All retries failed, throw the last error
+        throw lastError;
+    }
+
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    updateLoadingMessage(message) {
+        const loadingContent = document.querySelector('#loading-state h4');
+        if (loadingContent) {
+            loadingContent.textContent = message;
+        }
     }
 
     setGeneratingState(isGenerating) {

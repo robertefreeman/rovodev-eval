@@ -63,4 +63,5 @@ jobs:
           echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Status**: ✅ Deployed successfully" >> $GITHUB_STEP_SUMMARY
-          echo "- **URL**: https://${{ env.PROJECT_NAME }}.pages.dev" >> $GITHUB_STEP_SUMMARY
+          echo "- **Custom Domain**: https://freegen.r0b.cc" >> $GITHUB_STEP_SUMMARY
+          echo "- **Pages URL**: https://${{ env.PROJECT_NAME }}.pages.dev" >> $GITHUB_STEP_SUMMARY

@@ -10,13 +10,16 @@
     <meta property="og:url" content="https://freegen.r0b.cc">
     <meta property="og:title" content="FreeAI - AI Image Generator">
     <meta property="og:description" content="Generate beautiful AI images using Flux Schnell model. Not free, just made by Free.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%232d5a2d'/><circle cx='50' cy='50' r='20' fill='%23ffffff'/></svg>">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🤖 FreeAI</h1>
+            <h1>FreeAI</h1>
             <p>Not free, just made by Free</p>
         </header>
 
@@ -25,7 +28,7 @@
                 <!-- Left Panel: Input Controls -->
                 <div class="input-panel">
                     <div class="panel-header">
-                        <h2>🎨 Create Your Image</h2>
+                        <h2>Create Your Image</h2>
                         <p>Configure your AI image generation</p>
                     </div>
 
@@ -47,10 +50,10 @@
                         <div class="example-prompts">
                             <small>Quick examples:</small>
                             <div class="prompt-examples">
-                                <button type="button" class="example-btn" data-prompt="A majestic mountain landscape at sunset with golden light">🏔️ Mountain sunset</button>
-                                <button type="button" class="example-btn" data-prompt="A cute robot reading a book in a cozy library">🤖 Robot reading</button>
-                                <button type="button" class="example-btn" data-prompt="Abstract geometric patterns in vibrant colors">🎨 Abstract art</button>
-                                <button type="button" class="example-btn" data-prompt="A serene Japanese garden with cherry blossoms">🌸 Japanese garden</button>
+                                <button type="button" class="example-btn" data-prompt="A majestic mountain landscape at sunset with golden light">Mountain sunset</button>
+                                <button type="button" class="example-btn" data-prompt="A cute robot reading a book in a cozy library">Robot reading</button>
+                                <button type="button" class="example-btn" data-prompt="Abstract geometric patterns in vibrant colors">Abstract art</button>
+                                <button type="button" class="example-btn" data-prompt="A serene Japanese garden with cherry blossoms">Japanese garden</button>
                             </div>
                         </div>
                     </div>
@@ -91,15 +94,15 @@
                     </div>
 
                     <button id="generate-btn" class="generate-btn">
-                        <span class="btn-text">✨ Generate Image</span>
-                        <span class="btn-loading" style="display: none;">🎨 Generating...</span>
+                        <span class="btn-text">Generate Image</span>
+                        <span class="btn-loading" style="display: none;">Generating...</span>
                     </button>
                 </div>
 
                 <!-- Right Panel: Image Display -->
                 <div class="result-panel">
                     <div class="panel-header">
-                        <h2>🖼️ Generated Image</h2>
+                        <h2>Generated Image</h2>
                         <p>Your AI-created artwork will appear here</p>
                     </div>
 
@@ -114,7 +117,7 @@
 
                         <div id="placeholder" class="image-placeholder">
                             <div class="placeholder-content">
-                                <div class="placeholder-icon">🎨</div>
+                                <div class="placeholder-icon">◯</div>
                                 <h3>Ready to Create</h3>
                                 <p>Enter your prompt and click "Generate Image" to see your AI artwork here</p>
                             </div>
@@ -125,10 +128,10 @@
                                 <img id="generated-image" alt="Generated image">
                                 <div class="image-actions">
                                     <button id="download-btn" class="action-btn">
-                                        <span>💾</span> Download
+                                        Download
                                     </button>
                                     <button id="copy-url-btn" class="action-btn">
-                                        <span>🔗</span> Copy URL
+                                        Copy URL
                                     </button>
                                 </div>
                             </div>

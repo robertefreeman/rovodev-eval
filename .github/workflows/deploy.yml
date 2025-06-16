@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  PROJECT_NAME: fluxgen
+  PROJECT_NAME: freeai
 
 jobs:
   deploy:

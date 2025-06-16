@@ -1,7 +1,7 @@
 {
-  "name": "fluxgen",
+  "name": "freeai",
   "version": "1.0.0",
-  "description": "AI-powered image generator using Flux Schnell model via Together.AI",
+  "description": "FreeAI - AI-powered image generator using Flux Schnell model via Together.AI. Not free, just made by Free.",
   "main": "index.html",
   "scripts": {
     "dev": "npx wrangler pages dev .",

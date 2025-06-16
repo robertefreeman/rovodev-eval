@@ -1,263 +1,148 @@
-# Flux Image Generator
+# FreeAI Studio
 
-A simple web application that generates images using the Flux Schnell AI model via Together.AI's API. Built for deployment on Cloudflare Pages.
+A modern, professional web application for generating AI images using the Together.AI API with dual FLUX model support.
 
-## 🎨 Features
+## ✨ Features
 
-- **Simple Interface**: Clean, user-friendly design
-- **Flux Schnell Model**: Fast, high-quality image generation
-- **Customizable Parameters**: Adjust dimensions, steps, and prompts
-- **Download & Share**: Download generated images or copy URLs
-- **Responsive Design**: Works on desktop and mobile
-- **Local Storage**: Securely stores API key locally
-- **No Backend Required**: Pure client-side application
+### 🎨 **AI Image Generation**
+- Generate high-quality AI images from text prompts
+- **Dual Model Support**: Toggle between FLUX.1-schnell (Cheap) and FLUX.1-schnell-Free (Free)
+- Customizable image dimensions (512px, 768px, 1024px)
+- Adjustable generation steps (1-4 steps)
+- Real-time progress tracking with animated progress bars
 
-## 🚀 Live Demo
+### 🖼️ **Image Management**
+- Download generated images in high quality
+- Copy image URLs to clipboard
+- **Local Gallery System**: Automatically saves last 50 generated images
+- Modal image viewer for full-size viewing
+- Image metadata tracking (prompt, dimensions, model used)
 
-[View Live App](https://fluxgen.pages.dev) - **Automated deployment active!** ✅
+### 🎯 **User Experience**
+- **Foundation CSS Framework**: Professional, responsive design
+- **Monochrome Green Theme**: Soft, muted color palette
+- **Side-by-side Layout**: Control panel (45%) + Result panel (50%) on desktop
+- **Mobile Responsive**: Stacked layout on screens < 800px
+- **Smart Navigation**: Multi-section app (Generator, Gallery, Settings)
+- **Example Prompts**: Quick-start buttons for inspiration
 
-## 📋 Prerequisites
+### 🔧 **Technical Features**
+- Local storage of API key for convenience (never sent to our servers)
+- **Smart Deployment**: Conditional Cloudflare Pages project creation
+- **Progressive Enhancement**: Works without JavaScript for basic functionality
+- **Accessibility**: Proper ARIA labels and semantic HTML
 
-- A [Together.AI](https://together.ai) account and API key
-- A [Cloudflare](https://cloudflare.com) account (for deployment)
+## 🚀 Quick Start
 
-## 🛠️ Setup Instructions
-
-### 1. Get Together.AI API Key
-
-1. Sign up at [Together.AI](https://together.ai)
-2. Navigate to your API settings
-3. Generate a new API key
-4. Copy the key for use in the application
-
-### 2. Local Development
-
-1. Clone this repository:
+1. **Clone the repository**
    ```bash
    git clone https://github.com/robertefreeman/rovodev-eval.git
    cd rovodev-eval
    ```
 
-2. Open `index.html` in your browser or serve it locally:
-   ```bash
-   # Using Python
-   python -m http.server 8000
-   
-   # Using Node.js
-   npx serve .
-   
-   # Or simply open index.html in your browser
-   ```
+2. **Open in browser**
+   - Open `index.html` in your web browser
+   - Or deploy to any static hosting service
 
-3. Enter your Together.AI API key in the application
-4. Start generating images!
+3. **Get API Key**
+   - Sign up at [Together.AI](https://together.ai)
+   - Get your API key from the dashboard
 
-### 3. Deploy to Cloudflare Pages
+4. **Start Creating**
+   - Enter your Together.AI API key
+   - Choose your model (Free or Cheap)
+   - Write a prompt and generate!
 
-#### Option A: Automated Deployment (Recommended)
+## 🎛️ Model Options
 
-This repository includes GitHub Actions for automated deployment. Follow these steps:
+| Model | Label | Cost | Speed | Quality |
+|-------|-------|------|-------|---------|
+| `FLUX.1-schnell` | Cheap | Paid | Fast | High |
+| `FLUX.1-schnell-Free` | Free | Free | Fast | High |
 
-##### 🔑 Required GitHub Secrets
+Toggle between models using the switch in the control panel.
 
-You need to add **2 secrets** to your GitHub repository for automated deployment:
+## 🏗️ Technologies Used
 
-| Secret Name | Description | How to Get It |
-|-------------|-------------|---------------|
-| `CLOUDFLARE_API_TOKEN` | API token for Cloudflare authentication | [Create API Token](#creating-cloudflare-api-token) |
-| `CLOUDFLARE_ACCOUNT_ID` | Your Cloudflare account identifier | [Find Account ID](#finding-cloudflare-account-id) |
+### **Frontend**
+- **HTML5**: Semantic markup with accessibility features
+- **Foundation CSS 6.8.1**: Professional responsive framework
+- **Vanilla JavaScript ES6+**: Modern JavaScript without dependencies
+- **CSS Grid & Flexbox**: Advanced layout systems
+- **CSS Custom Properties**: Consistent theming system
 
-##### 📋 Step-by-Step Setup
+### **Backend/API**
+- **Together.AI API**: AI model hosting and inference
+- **FLUX Models**: State-of-the-art image generation
 
-**Step 1: Find Your Cloudflare Account ID**
-1. Log in to [Cloudflare Dashboard](https://dash.cloudflare.com)
-2. In the right sidebar, you'll see **Account ID**
-3. Click the copy button next to it
-4. Save this value - you'll need it for GitHub secrets
+### **Deployment**
+- **Cloudflare Pages**: Static site hosting with global CDN
+- **GitHub Actions**: Automated CI/CD pipeline
+- **Wrangler CLI**: Cloudflare deployment tooling
 
-**Step 2: Create Cloudflare API Token**
-1. Go to [Cloudflare API Tokens](https://dash.cloudflare.com/profile/api-tokens)
-2. Click **"Create Token"**
-3. Select **"Custom token"**
-4. Configure the token:
-   - **Token name**: `GitHub Actions Deployment`
-   - **Permissions**:
-     - `Cloudflare Pages:Edit`
-     - `Account:Read`
-   - **Account Resources**: Include your account
-   - **Zone Resources**: Include all zones
-5. Click **"Continue to summary"** → **"Create Token"**
-6. **Copy the token immediately** - you won't see it again!
+## 🌐 Deployment
 
-**Step 3: Add Secrets to GitHub**
-1. Go to your GitHub repository: `https://github.com/robertefreeman/rovodev-eval`
-2. Click **Settings** → **Secrets and variables** → **Actions**
-3. Click **"New repository secret"** and add each secret:
+### **Automatic Deployment**
+This project uses GitHub Actions for automatic deployment to Cloudflare Pages:
 
-   **First Secret:**
-   ```
-   Name: CLOUDFLARE_API_TOKEN
-   Value: [Paste your API token from Step 2]
-   ```
+1. **Push to main branch** triggers deployment
+2. **Smart project handling**: Creates project if needed, updates if exists
+3. **Live at**: https://freeai-app-2024.pages.dev
 
-   **Second Secret:**
-   ```
-   Name: CLOUDFLARE_ACCOUNT_ID
-   Value: [Paste your Account ID from Step 1]
-   ```
+### **Manual Deployment**
+```bash
+# Install Wrangler CLI
+npm install -g wrangler
 
-   > ⚠️ **Important**: Copy the names exactly as shown above (case-sensitive)
+# Deploy to Cloudflare Pages
+wrangler pages deploy . --project-name=freeai-app-2024
+```
 
-**Step 4: Test Deployment**
-1. Make any small change to your repository (e.g., edit this README)
-2. Commit and push to the `main` branch
-3. Go to **Actions** tab to watch the deployment
-4. Your app will be live at: `https://fluxgen.pages.dev`
+## 🔒 Privacy & Security
 
-##### ✅ Verification
+- **API keys stored locally**: Never transmitted to our servers
+- **No user tracking**: No analytics or user data collection
+- **Client-side only**: All processing happens in your browser
+- **Secure transmission**: All API calls use HTTPS
 
-After setup, every push to `main` will:
-- ✅ Automatically deploy to Cloudflare Pages
-- ✅ Show deployment status in GitHub Actions
-- ✅ Provide live URL in deployment summary
-- ✅ Create preview deployments for pull requests
+## 🎨 Design System
 
-📖 **[Detailed Deployment Guide](DEPLOYMENT.md)** | 🔧 **[Troubleshooting](DEPLOYMENT.md#troubleshooting)**
+### **Color Palette**
+- **Primary**: `#7a8a7a` (Muted gray-green)
+- **Secondary**: `#f5f7f5` (Pale green background)
+- **Success**: `#6b7b6b` (Darker green accents)
+- **Background**: Soft green gradient
 
-#### Option B: Manual Deployment
+### **Layout**
+- **Desktop**: Side-by-side layout with flexible widths
+- **Mobile**: Stacked layout with full-width cards
+- **Spacing**: Generous margins and padding throughout
+- **Typography**: Inter font family for modern readability
 
-1. Log in to [Cloudflare Dashboard](https://dash.cloudflare.com)
-2. Go to **Pages** → **Create a project**
-3. Connect your GitHub account and select this repository
-4. Configure build settings:
-   - **Build command**: Leave empty (static site)
-   - **Build output directory**: `/` (root directory)
-5. Click **Save and Deploy**
+## 📱 Browser Support
 
-#### Option C: Direct Upload
-
-1. Go to **Pages** → **Create a project** → **Direct Upload**
-2. Upload the following files:
-   - `index.html`
-   - `style.css`
-   - `script.js`
-3. Click **Save and Deploy**
-
-## 🎯 Usage
-
-1. **Enter API Key**: Input your Together.AI API key (stored locally)
-2. **Write Prompt**: Describe the image you want to generate
-3. **Adjust Settings**: 
-   - Choose image dimensions (512px to 1024px)
-   - Set steps (1-4, higher = better quality but slower)
-4. **Generate**: Click the generate button or press Ctrl+Enter
-5. **Download/Share**: Save the image or copy its URL
-
-## 🔧 Configuration
-
-### Supported Parameters
-
-- **Model**: `black-forest-labs/FLUX.1-schnell` (fixed)
-- **Dimensions**: 512×512, 768×768, 1024×1024, and custom combinations
-- **Steps**: 1-4 (Flux Schnell is optimized for 1-4 steps)
-- **Format**: URL response format
-
-### API Limits
-
-- Free tier: Check Together.AI pricing for current limits
-- Rate limiting: Handled automatically by the API
-
-## 🔒 Security & Privacy
-
-- **API Key Storage**: Stored locally in browser's localStorage
-- **No Server**: All processing happens client-side
-- **HTTPS**: Secure communication with Together.AI API
-- **No Data Collection**: No user data is collected or stored
-
-## 🎨 Customization
-
-### Styling
-Edit `style.css` to customize the appearance:
-- Colors and gradients
-- Layout and spacing
-- Responsive breakpoints
-
-### Functionality
-Modify `script.js` to add features:
-- Additional model parameters
-- Image editing capabilities
-- Batch generation
-
-## 📱 Browser Compatibility
-
-- Chrome/Edge 88+
-- Firefox 85+
-- Safari 14+
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **"Invalid API Key"**
-   - Verify your Together.AI API key is correct
-   - Check if your account has sufficient credits
-
-2. **"Network Error"**
-   - Check your internet connection
-   - Verify Together.AI service status
-
-3. **"Image Failed to Load"**
-   - The generated image URL may have expired
-   - Try generating a new image
-
-4. **CORS Errors**
-   - Make sure you're accessing the app via HTTPS
-   - Local file:// protocol may cause issues
-
-### Getting Help
-
-- Check [Together.AI Documentation](https://docs.together.ai)
-- Open an issue on this repository
-- Contact Together.AI support for API-related issues
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
+- **Modern browsers**: Chrome, Firefox, Safari, Edge (latest versions)
+- **Mobile browsers**: iOS Safari, Chrome Mobile, Samsung Internet
+- **Progressive enhancement**: Basic functionality without JavaScript
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 🙏 Acknowledgments
+## 📄 License
 
-- [Together.AI](https://together.ai) for providing the API
-- [Black Forest Labs](https://blackforestlabs.ai) for the Flux model
-- [Cloudflare Pages](https://pages.cloudflare.com) for free hosting
+MIT License - see [LICENSE](LICENSE) file for details.
 
-## 🔧 Quick Reference
+## 🔗 Links
 
-### GitHub Secrets Required for Deployment
-
-| Secret Name | Where to Find It | Purpose |
-|-------------|------------------|---------|
-| `CLOUDFLARE_API_TOKEN` | [Cloudflare API Tokens](https://dash.cloudflare.com/profile/api-tokens) | Authenticate with Cloudflare API |
-| `CLOUDFLARE_ACCOUNT_ID` | [Cloudflare Dashboard](https://dash.cloudflare.com) (right sidebar) | Identify your Cloudflare account |
-
-### Important URLs
-
-- **Live App**: `https://fluxgen.pages.dev`
-- **GitHub Actions**: `https://github.com/robertefreeman/rovodev-eval/actions`
-- **Cloudflare Dashboard**: `https://dash.cloudflare.com/pages`
-- **Together.AI API**: `https://api.together.xyz/playground`
-
-### API Token Permissions Required
-
-When creating your Cloudflare API token, ensure it has:
-- ✅ `Cloudflare Pages:Edit`
-- ✅ `Account:Read`
-- ✅ Access to your account resources
+- **Live Demo**: [https://freegen.r0b.cc](https://freegen.r0b.cc)
+- **GitHub**: [https://github.com/robertefreeman/rovodev-eval](https://github.com/robertefreeman/rovodev-eval)
+- **Together.AI**: [https://together.ai](https://together.ai)
 
 ---
 
-**Note**: This application requires a Together.AI API key. API usage may incur costs based on Together.AI's pricing structure.
+**Made with ❤️ by Free** | Powered by Together.AI and FLUX

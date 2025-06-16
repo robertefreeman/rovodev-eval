@@ -20,6 +20,7 @@ class FluxImageGenerator {
             loading: document.getElementById('loading'),
             error: document.getElementById('error'),
             result: document.getElementById('result'),
+            placeholder: document.getElementById('placeholder'),
             generatedImage: document.getElementById('generated-image'),
             downloadBtn: document.getElementById('download-btn'),
             copyUrlBtn: document.getElementById('copy-url-btn'),
@@ -155,6 +156,7 @@ class FluxImageGenerator {
             this.elements.btnText.style.display = 'none';
             this.elements.btnLoading.style.display = 'inline';
             this.elements.loading.style.display = 'block';
+            this.elements.placeholder.style.display = 'none';
         } else {
             this.elements.btnText.style.display = 'inline';
             this.elements.btnLoading.style.display = 'none';
@@ -173,6 +175,7 @@ class FluxImageGenerator {
 
     hideResult() {
         this.elements.result.style.display = 'none';
+        this.elements.placeholder.style.display = 'flex';
     }
 
     displayResult(imageUrl, params) {
@@ -180,6 +183,7 @@ class FluxImageGenerator {
         this.elements.usedPrompt.textContent = params.prompt;
         this.elements.usedDimensions.textContent = `${params.width} × ${params.height}`;
         this.elements.usedSteps.textContent = params.steps;
+        this.elements.placeholder.style.display = 'none';
         this.elements.result.style.display = 'block';
 
         // Store current image URL for download/copy functions

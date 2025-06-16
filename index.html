@@ -13,169 +13,307 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Foundation CSS Framework -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/2.0.3/motion-ui.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%232d5a2d'/><circle cx='50' cy='50' r='20' fill='%23ffffff'/></svg>">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>FreeAI</h1>
-            <p>Not free, just made by Free</p>
-        </header>
+    <div class="off-canvas-wrapper">
+        <!-- Mobile Menu -->
+        <div class="off-canvas position-left" id="mobile-menu" data-off-canvas>
+            <div class="off-canvas-content">
+                <ul class="vertical menu">
+                    <li><a href="#" class="menu-item" data-section="generator">🎨 Generator</a></li>
+                    <li><a href="#" class="menu-item" data-section="gallery">🖼️ Gallery</a></li>
+                    <li><a href="#" class="menu-item" data-section="settings">⚙️ Settings</a></li>
+                </ul>
+            </div>
+        </div>
 
-        <main>
-            <div class="app-layout">
-                <!-- Left Panel: Input Controls -->
-                <div class="input-panel">
-                    <div class="panel-header">
-                        <h2>Create Your Image</h2>
-                        <p>Configure your AI image generation</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="api-key">
-                            <span class="label-icon">🔑</span>
-                            Together.AI API Key
-                        </label>
-                        <input type="password" id="api-key" placeholder="Enter your Together.AI API key">
-                        <small>Your API key is stored locally and never sent to our servers</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="model-toggle">
-                            <span class="label-icon">🤖</span>
-                            Model Selection
-                        </label>
-                        <div class="toggle-container">
-                            <div class="toggle-switch">
-                                <input type="checkbox" id="model-toggle" class="toggle-input">
-                                <label for="model-toggle" class="toggle-label">
-                                    <span class="toggle-slider"></span>
-                                    <span class="toggle-text-left">Cheap</span>
-                                    <span class="toggle-text-right">Free</span>
-                                </label>
-                            </div>
-                            <small id="model-description">Using standard FLUX.1-schnell model</small>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="prompt">
-                            <span class="label-icon">✨</span>
-                            Image Prompt
-                        </label>
-                        <textarea id="prompt" placeholder="Describe the image you want to generate..." rows="4"></textarea>
-                        <div class="example-prompts">
-                            <small>Quick examples:</small>
-                            <div class="prompt-examples">
-                                <button type="button" class="example-btn" data-prompt="A majestic mountain landscape at sunset with golden light">Mountain sunset</button>
-                                <button type="button" class="example-btn" data-prompt="A cute robot reading a book in a cozy library">Robot reading</button>
-                                <button type="button" class="example-btn" data-prompt="Abstract geometric patterns in vibrant colors">Abstract art</button>
-                                <button type="button" class="example-btn" data-prompt="A serene Japanese garden with cherry blossoms">Japanese garden</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="settings-grid">
-                        <div class="form-group">
-                            <label for="width">
-                                <span class="label-icon">📐</span>
-                                Width
-                            </label>
-                            <select id="width">
-                                <option value="1024">1024px</option>
-                                <option value="768">768px</option>
-                                <option value="512">512px</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="height">
-                                <span class="label-icon">📏</span>
-                                Height
-                            </label>
-                            <select id="height">
-                                <option value="1024">1024px</option>
-                                <option value="768">768px</option>
-                                <option value="512">512px</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="steps">
-                                <span class="label-icon">⚡</span>
-                                Steps (1-4)
-                            </label>
-                            <input type="number" id="steps" min="1" max="4" value="1">
-                            <small>Higher steps = better quality but slower generation</small>
-                        </div>
-                    </div>
-
-                    <button id="generate-btn" class="generate-btn">
-                        <span class="btn-text">Generate Image</span>
-                        <span class="btn-loading" style="display: none;">Generating...</span>
-                    </button>
+        <div class="off-canvas-content" data-off-canvas-content>
+            <!-- Top Bar -->
+            <div class="top-bar" id="main-navbar">
+                <div class="top-bar-left">
+                    <ul class="menu">
+                        <li class="menu-text">
+                            <strong>FreeAI</strong>
+                            <span class="badge secondary">v2.0</span>
+                        </li>
+                    </ul>
                 </div>
-
-                <!-- Right Panel: Image Display -->
-                <div class="result-panel">
-                    <div class="panel-header">
-                        <h2>Generated Image</h2>
-                        <p>Your AI-created artwork will appear here</p>
-                    </div>
-
-                    <div class="result-content">
-                        <div id="loading" class="loading" style="display: none;">
-                            <div class="spinner"></div>
-                            <p>Creating your masterpiece...</p>
-                            <small>This usually takes 5-15 seconds</small>
-                        </div>
-
-                        <div id="error" class="error" style="display: none;"></div>
-
-                        <div id="placeholder" class="image-placeholder">
-                            <div class="placeholder-content">
-                                <div class="placeholder-icon">◯</div>
-                                <h3>Ready to Create</h3>
-                                <p>Enter your prompt and click "Generate Image" to see your AI artwork here</p>
-                            </div>
-                        </div>
-
-                        <div id="result" class="result" style="display: none;">
-                            <div class="image-container">
-                                <img id="generated-image" alt="Generated image">
-                                <div class="image-actions">
-                                    <button id="download-btn" class="action-btn">
-                                        Download
-                                    </button>
-                                    <button id="copy-url-btn" class="action-btn">
-                                        Copy URL
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="image-info">
-                                <div class="info-item">
-                                    <strong>Prompt:</strong> <span id="used-prompt"></span>
-                                </div>
-                                <div class="info-item">
-                                    <strong>Dimensions:</strong> <span id="used-dimensions"></span>
-                                </div>
-                                <div class="info-item">
-                                    <strong>Steps:</strong> <span id="used-steps"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="top-bar-right show-for-medium">
+                    <ul class="menu">
+                        <li><a href="#" class="button hollow secondary small" data-section="generator">🎨 Generator</a></li>
+                        <li><a href="#" class="button hollow secondary small" data-section="gallery">🖼️ Gallery</a></li>
+                        <li><a href="#" class="button hollow secondary small" data-section="settings">⚙️ Settings</a></li>
+                    </ul>
+                </div>
+                <div class="top-bar-right hide-for-medium">
+                    <ul class="menu">
+                        <li><button class="menu-icon" type="button" data-toggle="mobile-menu"></button></li>
+                    </ul>
                 </div>
             </div>
-        </main>
 
-        <footer>
-            <p>FreeAI - Powered by <a href="https://together.ai" target="_blank">Together.AI</a> and Flux Schnell</p>
-            <p><a href="https://github.com/robertefreeman/rovodev-eval" target="_blank">View on GitHub</a> | Made by Free | <a href="https://freegen.r0b.cc" target="_blank">freegen.r0b.cc</a></p>
-        </footer>
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="grid-container">
+                    <div class="grid-x grid-padding-x align-center text-center">
+                        <div class="cell large-8">
+                            <h1 class="hero-title" data-animate-in="fade-in-up">FreeAI Studio</h1>
+                            <p class="hero-subtitle" data-animate-in="fade-in-up" data-animation-delay="200">
+                                Create stunning AI-generated images with advanced FLUX models
+                            </p>
+                            <div class="hero-stats" data-animate-in="fade-in-up" data-animation-delay="400">
+                                <div class="stat-item">
+                                    <span class="stat-number" id="images-generated">1,247</span>
+                                    <span class="stat-label">Images Generated</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">2</span>
+                                    <span class="stat-label">AI Models</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">⚡</span>
+                                    <span class="stat-label">Lightning Fast</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main App Section -->
+            <main class="main-app" id="generator-section">
+                <div class="grid-container fluid">
+                    <div class="grid-x grid-padding-x">
+                        <!-- Control Panel -->
+                        <div class="cell large-4 medium-12">
+                            <div class="control-panel card" data-animate-in="slide-in-left">
+                                <div class="card-divider">
+                                    <h3>🎨 Create Your Masterpiece</h3>
+                                    <p class="subheader">Configure your AI image generation</p>
+                                </div>
+                                    <!-- API Key Input -->
+                                    <div class="input-group margin-bottom-2">
+                                        <span class="input-group-label">🔑</span>
+                                        <input type="password" id="api-key" class="input-group-field" placeholder="Enter your Together.AI API key">
+                                    </div>
+                                    <p class="help-text">Your API key is stored locally and never sent to our servers</p>
+
+                                    <!-- Model Selection Toggle -->
+                                    <fieldset class="fieldset margin-bottom-2">
+                                        <legend>🤖 Model Selection</legend>
+                                        <div class="switch-container">
+                                            <div class="switch large">
+                                                <input class="switch-input" id="model-toggle" type="checkbox" name="model-toggle">
+                                                <label class="switch-paddle" for="model-toggle">
+                                                    <span class="switch-active" aria-hidden="true">Free</span>
+                                                    <span class="switch-inactive" aria-hidden="true">Cheap</span>
+                                                </label>
+                                            </div>
+                                            <p class="help-text" id="model-description">Using standard FLUX.1-schnell model</p>
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- Prompt Input -->
+                                    <label for="prompt">✨ Image Prompt</label>
+                                    <textarea id="prompt" placeholder="Describe the image you want to generate..." rows="4"></textarea>
+                                    
+                                    <!-- Example Prompts -->
+                                    <div class="example-prompts margin-bottom-2">
+                                        <p class="help-text">Quick examples:</p>
+                                        <div class="button-group small">
+                                            <button type="button" class="button secondary hollow example-btn" data-prompt="A majestic mountain landscape at sunset with golden light">Mountain sunset</button>
+                                            <button type="button" class="button secondary hollow example-btn" data-prompt="A cute robot reading a book in a cozy library">Robot reading</button>
+                                        </div>
+                                        <div class="button-group small">
+                                            <button type="button" class="button secondary hollow example-btn" data-prompt="Abstract geometric patterns in vibrant colors">Abstract art</button>
+                                            <button type="button" class="button secondary hollow example-btn" data-prompt="A serene Japanese garden with cherry blossoms">Japanese garden</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Settings Grid -->
+                                    <div class="grid-x grid-padding-x margin-bottom-2">
+                                        <div class="cell medium-6">
+                                            <label for="width">📐 Width</label>
+                                            <select id="width">
+                                                <option value="1024">1024px</option>
+                                                <option value="768">768px</option>
+                                                <option value="512">512px</option>
+                                            </select>
+                                        </div>
+                                        <div class="cell medium-6">
+                                            <label for="height">📏 Height</label>
+                                            <select id="height">
+                                                <option value="1024">1024px</option>
+                                                <option value="768">768px</option>
+                                                <option value="512">512px</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="margin-bottom-2">
+                                        <label for="steps">⚡ Steps (1-4)</label>
+                                        <input type="number" id="steps" min="1" max="4" value="1">
+                                        <p class="help-text">Higher steps = better quality but slower generation</p>
+                                    </div>
+
+                                    <!-- Generate Button -->
+                                    <button id="generate-btn" class="button expanded large success">
+                                        <span class="btn-text">🚀 Generate Image</span>
+                                        <span class="btn-loading" style="display: none;">
+                                            <i class="loading-spinner"></i> Generating...
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Result Panel -->
+                        <div class="cell large-8 medium-12">
+                            <div class="result-panel card" data-animate-in="slide-in-right">
+                                <div class="card-divider">
+                                    <h3>🖼️ Your AI Masterpiece</h3>
+                                    <p class="subheader">Generated artwork will appear here</p>
+                                </div>
+                                <div class="card-section">
+                                    <!-- Loading State -->
+                                    <div id="loading" class="loading-state text-center" style="display: none;">
+                                        <div class="loading-spinner-container">
+                                            <div class="loading-spinner"></div>
+                                        </div>
+                                        <h4>Creating your masterpiece...</h4>
+                                        <p class="subheader">This usually takes 5-15 seconds</p>
+                                        <div class="progress" role="progressbar" tabindex="0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-meter" id="progress-bar" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Error State -->
+                                    <div id="error" class="callout alert" style="display: none;">
+                                        <h5>⚠️ Generation Error</h5>
+                                        <p id="error-message"></p>
+                                    </div>
+
+                                    <!-- Placeholder State -->
+                                    <div id="placeholder" class="placeholder-state text-center">
+                                        <div class="placeholder-icon">
+                                            <i class="fi-photo" style="font-size: 4rem; color: #cacaca;"></i>
+                                        </div>
+                                        <h4>Ready to Create</h4>
+                                        <p class="subheader">Configure your settings and click "Generate Image" to see your AI artwork here</p>
+                                        <div class="button-group">
+                                            <button class="button secondary hollow small" onclick="document.getElementById('prompt').focus()">
+                                                ✨ Start Creating
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Result State -->
+                                    <div id="result" class="result-state" style="display: none;">
+                                        <div class="image-container text-center">
+                                            <img id="generated-image" alt="Generated image" class="thumbnail">
+                                            <div class="image-actions margin-top-1">
+                                                <div class="button-group">
+                                                    <button id="download-btn" class="button primary">
+                                                        📥 Download
+                                                    </button>
+                                                    <button id="copy-url-btn" class="button secondary">
+                                                        🔗 Copy URL
+                                                    </button>
+                                                    <button class="button warning" onclick="document.getElementById('prompt').focus()">
+                                                        🔄 Generate New
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Image Info -->
+                                        <div class="image-info margin-top-2">
+                                            <div class="grid-x grid-padding-x">
+                                                <div class="cell">
+                                                    <div class="callout secondary">
+                                                        <h6>📝 Generation Details</h6>
+                                                        <dl>
+                                                            <dt>Prompt:</dt>
+                                                            <dd id="used-prompt" class="subheader"></dd>
+                                                            <dt>Dimensions:</dt>
+                                                            <dd id="used-dimensions" class="subheader"></dd>
+                                                            <dt>Steps:</dt>
+                                                            <dd id="used-steps" class="subheader"></dd>
+                                                            <dt>Model:</dt>
+                                                            <dd id="used-model" class="subheader"></dd>
+                                                        </dl>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Gallery Section (Hidden by default) -->
+            <section id="gallery-section" class="gallery-section" style="display: none;">
+                <div class="grid-container">
+                    <div class="grid-x grid-padding-x">
+                        <div class="cell">
+                            <h2>🖼️ Your Gallery</h2>
+                            <p class="subheader">Previously generated images</p>
+                            <div id="gallery-grid" class="grid-x grid-padding-x small-up-2 medium-up-3 large-up-4">
+                                <!-- Gallery items will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section (Hidden by default) -->
+            <section id="settings-section" class="settings-section" style="display: none;">
+                <div class="grid-container">
+                    <div class="grid-x grid-padding-x">
+                        <div class="cell large-8 large-offset-2">
+                            <div class="card">
+                                <div class="card-divider">
+                                    <h2>⚙️ Settings</h2>
+                                </div>
+                                <div class="card-section">
+                                    <h4>Preferences</h4>
+                                    <p>Customize your FreeAI experience</p>
+                                    <!-- Settings content will be added here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="grid-container">
+                    <div class="grid-x grid-padding-x align-center">
+                        <div class="cell text-center">
+                            <p>&copy; 2024 FreeAI Studio - Powered by <a href="https://together.ai" target="_blank">Together.AI</a> and FLUX</p>
+                            <p>
+                                <a href="https://github.com/robertefreeman/rovodev-eval" target="_blank">View on GitHub</a> | 
+                                Made by Free | 
+                                <a href="https://freegen.r0b.cc" target="_blank">freegen.r0b.cc</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
     </div>
 
+    <!-- Foundation JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/js/foundation.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

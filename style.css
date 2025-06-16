@@ -2,21 +2,22 @@
 
 /* ===== CUSTOM VARIABLES ===== */
 :root {
-    --primary-color: #2ba6cb;
-    --secondary-color: #e9ecef;
-    --success-color: #5da423;
-    --warning-color: #ffae00;
-    --alert-color: #cc4b37;
-    --dark-color: #0a0e27;
-    --light-color: #fefefe;
+    --primary-color: #6b8e6b;
+    --secondary-color: #f0f5f0;
+    --success-color: #5a7c5a;
+    --warning-color: #8fbc8f;
+    --alert-color: #a0a0a0;
+    --dark-color: #2d4a2d;
+    --light-color: #fafcfa;
     
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --gradient-primary: linear-gradient(135deg, #8fbc8f 0%, #6b8e6b 100%);
+    --gradient-secondary: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
+    --gradient-success: linear-gradient(135deg, #90ee90 0%, #98fb98 100%);
+    --gradient-bg: linear-gradient(135deg, #f0f8f0 0%, #e8f5e8 50%, #f0f8f0 100%);
     
-    --shadow-light: 0 2px 10px rgba(0,0,0,0.1);
-    --shadow-medium: 0 8px 30px rgba(0,0,0,0.12);
-    --shadow-heavy: 0 15px 35px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.07);
+    --shadow-light: 0 2px 10px rgba(45, 74, 45, 0.1);
+    --shadow-medium: 0 8px 30px rgba(45, 74, 45, 0.12);
+    --shadow-heavy: 0 15px 35px rgba(45, 74, 45, 0.1), 0 5px 15px rgba(45, 74, 45, 0.07);
     
     --border-radius: 12px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -25,9 +26,9 @@
 /* ===== GLOBAL STYLES ===== */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--gradient-bg);
     min-height: 100vh;
-    color: #333;
+    color: #2d4a2d;
     overflow-x: hidden;
 }
 
@@ -106,9 +107,9 @@ body {
 
 /* ===== TOP BAR ===== */
 .top-bar {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(240, 248, 240, 0.95);
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(107, 142, 107, 0.2);
     box-shadow: var(--shadow-light);
     position: sticky;
     top: 0;
@@ -132,28 +133,25 @@ body {
 
 /* ===== HERO SECTION ===== */
 .hero-section {
-    padding: 4rem 0;
+    padding: 2rem 0;
     background: transparent;
-    color: white;
+    color: var(--dark-color);
     text-align: center;
 }
 
 .hero-title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    background: linear-gradient(45deg, #fff, #f0f8ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
 }
 
 .hero-subtitle {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-    font-weight: 300;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+    font-weight: 400;
+    color: var(--primary-color);
 }
 
 .hero-stats {
@@ -169,10 +167,10 @@ body {
 
 .stat-number {
     display: block;
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
-    color: #fff;
-    margin-bottom: 0.5rem;
+    color: var(--success-color);
+    margin-bottom: 0.3rem;
 }
 
 .stat-label {
@@ -184,40 +182,78 @@ body {
 
 /* ===== MAIN APP ===== */
 .main-app {
-    padding: 3rem 0;
-    min-height: 80vh;
+    padding: 1rem 0;
+    min-height: 70vh;
+}
+
+/* ===== LAYOUT FIXES ===== */
+.main-app .grid-container.fluid {
+    max-width: 100%;
+    padding: 0 1rem;
+}
+
+.main-app .grid-x {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main-app .cell {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Ensure side-by-side layout on larger screens */
+@media screen and (min-width: 801px) {
+    .main-app .grid-x {
+        align-items: flex-start;
+    }
+    
+    .main-app .cell.large-4 {
+        flex: 0 0 35%;
+        max-width: 35%;
+    }
+    
+    .main-app .cell.large-8 {
+        flex: 0 0 65%;
+        max-width: 65%;
+    }
 }
 
 /* ===== CARDS ===== */
 .card {
-    border: none;
+    border: 1px solid rgba(107, 142, 107, 0.2);
     border-radius: var(--border-radius);
-    box-shadow: var(--shadow-medium);
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-light);
+    background: rgba(250, 252, 250, 0.95);
+    backdrop-filter: blur(10px);
     transition: var(--transition);
     overflow: hidden;
+    height: fit-content;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-heavy);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
 }
 
 .card-divider {
     background: var(--gradient-primary);
     color: white;
     border-bottom: none;
-    padding: 1.5rem;
+    padding: 1rem 1.5rem;
 }
 
 .card-divider h3 {
     margin: 0;
     font-weight: 600;
+    font-size: 1.2rem;
 }
 
 .card-section {
-    padding: 2rem;
+    padding: 1.5rem;
 }
 
 /* ===== FORM ELEMENTS ===== */
@@ -225,30 +261,30 @@ body {
     background: var(--gradient-primary);
     color: white;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 0 1rem;
 }
 
 .input-group-field {
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--secondary-color);
     border-radius: 0 8px 8px 0;
     transition: var(--transition);
 }
 
 .input-group-field:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(43, 166, 203, 0.1);
+    box-shadow: 0 0 0 3px rgba(107, 142, 107, 0.1);
 }
 
 textarea, select, input[type="number"] {
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--secondary-color);
     border-radius: 8px;
     transition: var(--transition);
 }
 
 textarea:focus, select:focus, input[type="number"]:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(43, 166, 203, 0.1);
+    box-shadow: 0 0 0 3px rgba(107, 142, 107, 0.1);
 }
 
 /* ===== SWITCH COMPONENT ===== */
@@ -262,7 +298,7 @@ textarea:focus, select:focus, input[type="number"]:focus {
 }
 
 .switch-paddle {
-    background: #cacaca;
+    background: #d4d4d4;
     transition: var(--transition);
 }
 
@@ -305,13 +341,13 @@ textarea:focus, select:focus, input[type="number"]:focus {
 }
 
 .button.secondary.hollow {
-    border: 2px solid #6c757d;
-    color: #6c757d;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
     background: transparent;
 }
 
 .button.secondary.hollow:hover {
-    background: #6c757d;
+    background: var(--primary-color);
     color: white;
     transform: translateY(-1px);
 }
@@ -325,7 +361,7 @@ textarea:focus, select:focus, input[type="number"]:focus {
 .loading-spinner {
     width: 3rem;
     height: 3rem;
-    border: 4px solid rgba(43, 166, 203, 0.1);
+    border: 4px solid rgba(107, 142, 107, 0.1);
     border-left: 4px solid var(--primary-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -337,7 +373,7 @@ textarea:focus, select:focus, input[type="number"]:focus {
 }
 
 .progress {
-    background: rgba(43, 166, 203, 0.1);
+    background: rgba(107, 142, 107, 0.1);
     border-radius: 50px;
     overflow: hidden;
 }
@@ -349,8 +385,8 @@ textarea:focus, select:focus, input[type="number"]:focus {
 
 /* ===== PLACEHOLDER STATE ===== */
 .placeholder-state {
-    padding: 4rem 2rem;
-    color: #6c757d;
+    padding: 3rem 2rem;
+    color: var(--primary-color);
 }
 
 .placeholder-icon {
@@ -379,39 +415,50 @@ textarea:focus, select:focus, input[type="number"]:focus {
 }
 
 .callout.alert {
-    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    background: linear-gradient(135deg, #d4a574, #c49464);
     color: white;
 }
 
 .callout.secondary {
-    background: #f8f9fa;
+    background: var(--secondary-color);
     border-left: 4px solid var(--primary-color);
 }
 
 /* ===== FOOTER ===== */
 .footer {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    color: white;
-    padding: 2rem 0;
-    margin-top: 4rem;
+    background: rgba(107, 142, 107, 0.1);
+    backdrop-filter: blur(10px);
+    color: var(--dark-color);
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(107, 142, 107, 0.2);
 }
 
 .footer a {
-    color: white;
+    color: var(--primary-color);
     text-decoration: none;
     transition: var(--transition);
 }
 
 .footer a:hover {
-    color: #f0f8ff;
+    color: var(--success-color);
     text-decoration: underline;
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
+    .main-app .grid-x {
+        flex-direction: column;
+    }
+    
+    .main-app .cell.large-4,
+    .main-app .cell.large-8 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
     
     .hero-stats {
@@ -420,7 +467,7 @@ textarea:focus, select:focus, input[type="number"]:focus {
     }
     
     .stat-number {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     
     .card-section {
@@ -432,9 +479,10 @@ textarea:focus, select:focus, input[type="number"]:focus {
     }
 }
 
+
 /* ===== UTILITY CLASSES ===== */
 .margin-bottom-2 {
-    margin-bottom: 2rem !important;
+    margin-bottom: 1.5rem !important;
 }
 
 .margin-top-1 {
@@ -442,7 +490,28 @@ textarea:focus, select:focus, input[type="number"]:focus {
 }
 
 .margin-top-2 {
-    margin-top: 2rem !important;
+    margin-top: 1.5rem !important;
+}
+
+/* ===== FORM SPACING ===== */
+.fieldset {
+    margin-bottom: 1.5rem;
+}
+
+.help-text {
+    color: var(--primary-color);
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+/* ===== BUTTON IMPROVEMENTS ===== */
+.button-group {
+    margin-bottom: 1rem;
+}
+
+.button-group .button {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 /* ===== CUSTOM ANIMATIONS FOR INTERACTIONS ===== */

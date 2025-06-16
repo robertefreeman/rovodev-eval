@@ -42,12 +42,22 @@ jobs:
           echo "HTML validation passed"
 
       - name: Check if Cloudflare Pages Project exists
+        id: check-project
         uses: cloudflare/wrangler-action@v3
         continue-on-error: true
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages project list
+          command: pages project list --format json
+        
+      - name: Create Cloudflare Pages Project (if needed)
+        if: ${{ !contains(steps.check-project.outputs.command-output, env.PROJECT_NAME) }}
+        uses: cloudflare/wrangler-action@v3
+        continue-on-error: true
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages project create ${{ env.PROJECT_NAME }} --production-branch main
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

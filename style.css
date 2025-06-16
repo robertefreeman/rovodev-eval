@@ -2,22 +2,22 @@
 
 /* ===== CUSTOM VARIABLES ===== */
 :root {
-    --primary-color: #6b8e6b;
-    --secondary-color: #f0f5f0;
-    --success-color: #5a7c5a;
-    --warning-color: #8fbc8f;
-    --alert-color: #a0a0a0;
-    --dark-color: #2d4a2d;
-    --light-color: #fafcfa;
+    --primary-color: #7a8a7a;
+    --secondary-color: #f5f7f5;
+    --success-color: #6b7b6b;
+    --warning-color: #9aaa9a;
+    --alert-color: #b0b0b0;
+    --dark-color: #3a4a3a;
+    --light-color: #fcfcfc;
     
-    --gradient-primary: linear-gradient(135deg, #8fbc8f 0%, #6b8e6b 100%);
-    --gradient-secondary: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
-    --gradient-success: linear-gradient(135deg, #90ee90 0%, #98fb98 100%);
-    --gradient-bg: linear-gradient(135deg, #f0f8f0 0%, #e8f5e8 50%, #f0f8f0 100%);
+    --gradient-primary: linear-gradient(135deg, #9aaa9a 0%, #7a8a7a 100%);
+    --gradient-secondary: linear-gradient(135deg, #f0f3f0 0%, #e8ebe8 100%);
+    --gradient-success: linear-gradient(135deg, #a5b5a5 0%, #95a595 100%);
+    --gradient-bg: linear-gradient(135deg, #f8faf8 0%, #f0f3f0 50%, #f8faf8 100%);
     
-    --shadow-light: 0 2px 10px rgba(45, 74, 45, 0.1);
-    --shadow-medium: 0 8px 30px rgba(45, 74, 45, 0.12);
-    --shadow-heavy: 0 15px 35px rgba(45, 74, 45, 0.1), 0 5px 15px rgba(45, 74, 45, 0.07);
+    --shadow-light: 0 2px 10px rgba(58, 74, 58, 0.08);
+    --shadow-medium: 0 8px 30px rgba(58, 74, 58, 0.1);
+    --shadow-heavy: 0 15px 35px rgba(58, 74, 58, 0.08), 0 5px 15px rgba(58, 74, 58, 0.05);
     
     --border-radius: 12px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -28,7 +28,7 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: var(--gradient-bg);
     min-height: 100vh;
-    color: #2d4a2d;
+    color: var(--dark-color);
     overflow-x: hidden;
 }
 
@@ -105,31 +105,6 @@ body {
     animation-delay: 0.4s;
 }
 
-/* ===== TOP BAR ===== */
-.top-bar {
-    background: rgba(240, 248, 240, 0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(107, 142, 107, 0.2);
-    box-shadow: var(--shadow-light);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.top-bar .menu-text strong {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.badge {
-    font-size: 0.7rem;
-    padding: 0.2rem 0.5rem;
-    margin-left: 0.5rem;
-}
 
 /* ===== HERO SECTION ===== */
 .hero-section {
@@ -224,10 +199,10 @@ body {
 
 /* ===== CARDS ===== */
 .card {
-    border: 1px solid rgba(107, 142, 107, 0.2);
+    border: 1px solid rgba(122, 138, 122, 0.15);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-light);
-    background: rgba(250, 252, 250, 0.95);
+    background: rgba(252, 252, 252, 0.95);
     backdrop-filter: blur(10px);
     transition: var(--transition);
     overflow: hidden;
@@ -253,7 +228,52 @@ body {
 }
 
 .card-section {
-    padding: 1.5rem;
+    padding: 2rem;
+}
+
+/* ===== FORM SPACING IMPROVEMENTS ===== */
+.card-section > * {
+    margin-bottom: 1.5rem;
+}
+
+.card-section > *:last-child {
+    margin-bottom: 0;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.fieldset {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid rgba(122, 138, 122, 0.2);
+    border-radius: 8px;
+    background: rgba(245, 247, 245, 0.5);
+}
+
+.fieldset legend {
+    font-weight: 600;
+    color: var(--dark-color);
+    padding: 0 0.5rem;
+}
+
+.switch-container {
+    margin: 1rem 0;
+}
+
+.example-prompts {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.button-group {
+    margin-bottom: 1rem;
+}
+
+.button-group .button {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 /* ===== FORM ELEMENTS ===== */
@@ -273,18 +293,27 @@ body {
 
 .input-group-field:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(107, 142, 107, 0.1);
+    box-shadow: 0 0 0 3px rgba(122, 138, 122, 0.1);
 }
 
 textarea, select, input[type="number"] {
     border: 2px solid var(--secondary-color);
     border-radius: 8px;
     transition: var(--transition);
+    margin-bottom: 0.5rem;
 }
 
 textarea:focus, select:focus, input[type="number"]:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(107, 142, 107, 0.1);
+    box-shadow: 0 0 0 3px rgba(122, 138, 122, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--dark-color);
+    font-size: 0.95rem;
 }
 
 /* ===== SWITCH COMPONENT ===== */
@@ -361,7 +390,7 @@ textarea:focus, select:focus, input[type="number"]:focus {
 .loading-spinner {
     width: 3rem;
     height: 3rem;
-    border: 4px solid rgba(107, 142, 107, 0.1);
+    border: 4px solid rgba(122, 138, 122, 0.1);
     border-left: 4px solid var(--primary-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -373,7 +402,7 @@ textarea:focus, select:focus, input[type="number"]:focus {
 }
 
 .progress {
-    background: rgba(107, 142, 107, 0.1);
+    background: rgba(122, 138, 122, 0.1);
     border-radius: 50px;
     overflow: hidden;
 }
@@ -426,12 +455,12 @@ textarea:focus, select:focus, input[type="number"]:focus {
 
 /* ===== FOOTER ===== */
 .footer {
-    background: rgba(107, 142, 107, 0.1);
+    background: rgba(122, 138, 122, 0.08);
     backdrop-filter: blur(10px);
     color: var(--dark-color);
     padding: 1.5rem 0;
     margin-top: 2rem;
-    border-top: 1px solid rgba(107, 142, 107, 0.2);
+    border-top: 1px solid rgba(122, 138, 122, 0.15);
 }
 
 .footer a {
@@ -493,25 +522,12 @@ textarea:focus, select:focus, input[type="number"]:focus {
     margin-top: 1.5rem !important;
 }
 
-/* ===== FORM SPACING ===== */
-.fieldset {
-    margin-bottom: 1.5rem;
-}
-
+/* ===== HELP TEXT ===== */
 .help-text {
     color: var(--primary-color);
     opacity: 0.8;
     font-size: 0.9rem;
-}
-
-/* ===== BUTTON IMPROVEMENTS ===== */
-.button-group {
-    margin-bottom: 1rem;
-}
-
-.button-group .button {
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
 }
 
 /* ===== CUSTOM ANIMATIONS FOR INTERACTIONS ===== */

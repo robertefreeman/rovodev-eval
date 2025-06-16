@@ -1,5 +1,5 @@
 {
-  "name": "freeai-generator",
+  "name": "freeai-app-2024",
   "version": "1.0.0",
   "description": "FreeAI - AI-powered image generator using Flux Schnell model via Together.AI. Not free, just made by Free.",
   "main": "index.html",

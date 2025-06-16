@@ -215,7 +215,13 @@ class FreeAIGenerator {
                 lastError = error;
                 
                 // Check if this is a rate limiting error that we should retry
-                console.log('API Error:', error.message, 'Status:', error.status);
+                console.log('=== DEBUGGING RATE LIMIT ===');
+                console.log('Full error object:', error);
+                console.log('Error message:', error.message);
+                console.log('Error status:', error.status);
+                console.log('Error statusText:', error.statusText);
+                console.log('================================');
+                
                 const isRateLimitError = error.status === 429 ||
                                        error.message.includes('rate limit') || 
                                        error.message.includes('429') ||
@@ -224,6 +230,8 @@ class FreeAIGenerator {
                                        error.message.includes('Rate limit') ||
                                        error.message.includes('rate_limit') ||
                                        error.message.toLowerCase().includes('rate limit');
+                
+                console.log('Is rate limit error?', isRateLimitError);
                 
                 // Only retry for rate limiting errors
                 if (isRateLimitError && attempt < maxRetries) {

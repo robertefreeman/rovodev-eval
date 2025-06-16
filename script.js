@@ -18,7 +18,10 @@ class FreeAIGenerator {
 
     initializeFoundation() {
         // Initialize Foundation components
-        $(document).foundation();
+        if (typeof Foundation !== 'undefined') {
+            Foundation.addToJquery($);
+            $(document).foundation();
+        }
     }
 
     initializeElements() {
@@ -56,25 +59,35 @@ class FreeAIGenerator {
 
     bindEvents() {
         // Form submission
-        document.getElementById('generation-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.generateImage();
-        });
+        const form = document.getElementById('generation-form');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.generateImage();
+            });
+        }
 
         // API key input
-        this.elements.apiKey.addEventListener('input', () => this.saveApiKey());
+        if (this.elements.apiKey) {
+            this.elements.apiKey.addEventListener('input', () => this.saveApiKey());
+        }
 
         // Steps slider
-        this.elements.steps.addEventListener('input', (e) => {
-            this.elements.stepsValue.textContent = e.target.value;
-        });
+        if (this.elements.steps && this.elements.stepsValue) {
+            this.elements.steps.addEventListener('input', (e) => {
+                this.elements.stepsValue.textContent = e.target.value;
+            });
+        }
 
         // Example prompts
         document.querySelectorAll('.example-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
+                e.preventDefault();
                 const prompt = e.target.getAttribute('data-prompt');
-                this.elements.prompt.value = prompt;
-                this.elements.prompt.focus();
+                if (this.elements.prompt && prompt) {
+                    this.elements.prompt.value = prompt;
+                    this.elements.prompt.focus();
+                }
             });
         });
 

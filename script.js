@@ -190,7 +190,10 @@ class FreeAIGenerator {
 
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            throw new Error(errorData.error?.message || `API request failed: ${response.status}`);
+            const error = new Error(errorData.error?.message || `API request failed: ${response.status}`);
+            error.status = response.status;
+            error.statusText = response.statusText;
+            throw error;
         }
 
         const data = await response.json();
@@ -212,10 +215,15 @@ class FreeAIGenerator {
                 lastError = error;
                 
                 // Check if this is a rate limiting error that we should retry
-                const isRateLimitError = error.message.includes('rate limit') || 
+                console.log('API Error:', error.message, 'Status:', error.status);
+                const isRateLimitError = error.status === 429 ||
+                                       error.message.includes('rate limit') || 
                                        error.message.includes('429') ||
                                        error.message.includes('too many requests') ||
-                                       error.message.includes('API request failed: 429');
+                                       error.message.includes('API request failed: 429') ||
+                                       error.message.includes('Rate limit') ||
+                                       error.message.includes('rate_limit') ||
+                                       error.message.toLowerCase().includes('rate limit');
                 
                 // Only retry for rate limiting errors
                 if (isRateLimitError && attempt < maxRetries) {

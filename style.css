@@ -157,43 +157,46 @@ body {
 
 /* ===== MAIN APP ===== */
 .main-app {
-    padding: 1rem 0;
+    padding: 2rem 0;
     min-height: 70vh;
 }
 
 /* ===== LAYOUT FIXES ===== */
 .main-app .grid-container.fluid {
-    max-width: 100%;
-    padding: 0 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 .main-app .grid-x {
-    margin-left: -0.75rem;
-    margin-right: -0.75rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .main-app .cell {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-bottom: 2rem;
 }
 
 /* Ensure side-by-side layout on larger screens */
 @media screen and (min-width: 801px) {
     .main-app .grid-x {
         align-items: flex-start;
+        justify-content: center;
     }
     
     .main-app .cell.large-4 {
-        flex: 0 0 35%;
-        max-width: 35%;
+        flex: 0 0 400px;
+        max-width: 400px;
     }
     
     .main-app .cell.large-8 {
-        flex: 0 0 65%;
-        max-width: 65%;
+        flex: 0 0 500px;
+        max-width: 500px;
     }
 }
 
@@ -228,12 +231,12 @@ body {
 }
 
 .card-section {
-    padding: 2rem;
+    padding: 3rem;
 }
 
 /* ===== FORM SPACING IMPROVEMENTS ===== */
 .card-section > * {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .card-section > *:last-child {
@@ -241,12 +244,12 @@ body {
 }
 
 .input-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .fieldset {
-    margin-bottom: 1.5rem;
-    padding: 1rem;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
     border: 1px solid rgba(122, 138, 122, 0.2);
     border-radius: 8px;
     background: rgba(245, 247, 245, 0.5);
@@ -259,21 +262,22 @@ body {
 }
 
 .switch-container {
-    margin: 1rem 0;
+    margin: 2rem 0;
 }
 
 .example-prompts {
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .button-group {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 .button-group .button {
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem 1.5rem;
 }
 
 /* ===== FORM ELEMENTS ===== */
@@ -300,7 +304,8 @@ textarea, select, input[type="number"] {
     border: 2px solid var(--secondary-color);
     border-radius: 8px;
     transition: var(--transition);
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
 }
 
 textarea:focus, select:focus, input[type="number"]:focus {
@@ -310,10 +315,10 @@ textarea:focus, select:focus, input[type="number"]:focus {
 
 label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     font-weight: 500;
     color: var(--dark-color);
-    font-size: 0.95rem;
+    font-size: 1rem;
 }
 
 /* ===== SWITCH COMPONENT ===== */
@@ -511,15 +516,15 @@ label {
 
 /* ===== UTILITY CLASSES ===== */
 .margin-bottom-2 {
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 2.5rem !important;
 }
 
 .margin-top-1 {
-    margin-top: 1rem !important;
+    margin-top: 1.5rem !important;
 }
 
 .margin-top-2 {
-    margin-top: 1.5rem !important;
+    margin-top: 2.5rem !important;
 }
 
 /* ===== HELP TEXT ===== */

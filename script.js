@@ -217,6 +217,7 @@ class FreeAIGenerator {
                                        error.message.includes('too many requests') ||
                                        error.message.includes('API request failed: 429');
                 
+                // Only retry for rate limiting errors
                 if (isRateLimitError && attempt < maxRetries) {
                     const waitTime = 10000; // 10 seconds
                     console.log(`Rate limit hit, waiting ${waitTime/1000} seconds before retry ${attempt + 1}/${maxRetries}...`);
@@ -228,18 +229,8 @@ class FreeAIGenerator {
                     
                     // Reset loading message
                     this.updateLoadingMessage('Creating your masterpiece...');
-                } else if (attempt < maxRetries) {
-                    // For other errors, wait 5 seconds before retry
-                    const waitTime = 5000; // 5 seconds
-                    console.log(`Generation failed, waiting ${waitTime/1000} seconds before retry ${attempt + 1}/${maxRetries}...`);
-                    
-                    this.updateLoadingMessage(`Generation failed. Retrying in ${waitTime/1000} seconds... (${attempt + 1}/${maxRetries})`);
-                    
-                    await this.delay(waitTime);
-                    
-                    this.updateLoadingMessage('Creating your masterpiece...');
                 } else {
-                    // Final attempt failed
+                    // For non-rate-limit errors, don't retry - fail immediately
                     break;
                 }
             }

@@ -5,6 +5,7 @@ class FluxImageGenerator {
         this.initializeElements();
         this.bindEvents();
         this.loadSavedApiKey();
+        this.updateModelDescription();
     }
 
     initializeElements() {
@@ -26,7 +27,9 @@ class FluxImageGenerator {
             copyUrlBtn: document.getElementById('copy-url-btn'),
             usedPrompt: document.getElementById('used-prompt'),
             usedDimensions: document.getElementById('used-dimensions'),
-            usedSteps: document.getElementById('used-steps')
+            usedSteps: document.getElementById('used-steps'),
+            modelToggle: document.getElementById('model-toggle'),
+            modelDescription: document.getElementById('model-description')
         };
     }
 
@@ -35,6 +38,7 @@ class FluxImageGenerator {
         this.elements.apiKey.addEventListener('input', () => this.saveApiKey());
         this.elements.downloadBtn.addEventListener('click', () => this.downloadImage());
         this.elements.copyUrlBtn.addEventListener('click', () => this.copyImageUrl());
+        this.elements.modelToggle.addEventListener('change', () => this.updateModelDescription());
         
         // Allow Enter key in prompt textarea to trigger generation
         this.elements.prompt.addEventListener('keydown', (e) => {
@@ -59,6 +63,21 @@ class FluxImageGenerator {
             this.elements.apiKey.value = savedKey;
             this.apiKey = savedKey;
         }
+    }
+
+    updateModelDescription() {
+        const isFreeModel = this.elements.modelToggle.checked;
+        if (isFreeModel) {
+            this.elements.modelDescription.textContent = 'Using FLUX.1-schnell-Free model (Free tier)';
+        } else {
+            this.elements.modelDescription.textContent = 'Using standard FLUX.1-schnell model';
+        }
+    }
+
+    getSelectedModel() {
+        return this.elements.modelToggle.checked ? 
+            'black-forest-labs/FLUX.1-schnell-Free' : 
+            'black-forest-labs/FLUX.1-schnell';
     }
 
     saveApiKey() {
@@ -124,7 +143,7 @@ class FluxImageGenerator {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: 'black-forest-labs/FLUX.1-schnell',
+                model: this.getSelectedModel(),
                 prompt: params.prompt,
                 width: params.width,
                 height: params.height,
